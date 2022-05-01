@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #signup {
+        width: 500px;
+        height: auto;
+        margin: auto;
+        border: 1px solid;
+        padding: 95px;
+        /* display: flex; */
+        background-color: rgb(233, 218, 206);
+        box-sizing: border-box;
+        margin-top: 150px;
+      }
+      #form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 1px;
+      }
+      input {
+        padding: 15px;
+        border-radius: 7px;
+      }
+    </style>
+  </head>
+  <body></body>
+  <div id="signup">
+    <form id="form">
+      <input id="email" type="email" placeholder="Email" />
+
+      <input id="password" type="password" placeholder="Password" />
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+</html>
+<script>
+  var data = JSON.parse(localStorage.getItem("loginDetails"));
+
+  document.querySelector("#form").addEventListener("submit", login);
+  function login() {
+    var email = document.querySelector("#email").value;
+    var pass = document.querySelector("#password").value;
+    event.preventDefault();
+
+    for (var i = 0; i < data.length; i++) {
+      if (email == data[i].email && pass == data[i].pass) {
+        return alert("login Sucessfull");
+      }
+    }
+
+    alert("Wrong  Login Credntials");
+  }
+</script>

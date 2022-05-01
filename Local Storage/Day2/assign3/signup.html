@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #signup {
+        width: 500px;
+        height: auto;
+        margin: auto;
+        border: 1px solid;
+        padding: 95px;
+        /* display: flex; */
+        background-color: rgb(233, 218, 206);
+        box-sizing: border-box;
+        margin-top: 150px;
+      }
+      #form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 1px;
+      }
+      input {
+        padding: 15px;
+        border-radius: 7px;
+      }
+      p {
+        width: 80%;
+        text-align: center;
+        margin-left: 25px;
+        color: red;
+      }
+      button {
+        padding: 15px;
+        width: 100%;
+        border-radius: 7px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="signup">
+      <form id="form">
+        <input id="email" type="email" placeholder="Email" />
+        <input id="phn" type="number" placeholder="Phnone Number" />
+        <input id="password" type="password" placeholder="Password" />
+        <input type="submit" value="Sign Up" />
+      </form>
+      <p>If User already has account Kindly Login</p>
+      <button>Login</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  document.querySelector("form").addEventListener("submit", loginData);
+
+  var loginArr = JSON.parse(localStorage.getItem("loginDetails")) || [];
+
+  function loginData() {
+    event.preventDefault();
+
+    var obj = {
+      email: form.email.value,
+      phon: form.phn.value,
+      pass: form.password.value,
+    };
+    loginArr.push(obj);
+    localStorage.setItem("loginDetails", JSON.stringify(loginArr));
+  }
+</script>
