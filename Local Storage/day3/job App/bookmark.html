@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admitted</title>
+    <link rel="stylesheet" href="commonStyles.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="index.html">Home</a></div>
+      <div><a href="applied.html">Applied Jobs</a></div>
+      <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Job Applied</th>
+            <th>Salary</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody id="body"></tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    //you need to code here
+    var bookMarkData = JSON.parse(localStorage.getItem("bookMark"));
+    var tbody = document.querySelector("#body");
+
+    bookMarkData.forEach(function (elem, ind) {
+      var box = document.createElement("tr");
+
+      var td1 = document.createElement("td");
+      td1.innerText = elem.nam;
+
+      var td2 = document.createElement("td");
+      td2.innerText = elem.mail;
+
+      var td3 = document.createElement("td");
+      td3.innerText = elem.jobRol;
+
+      var td4 = document.createElement("td");
+      td4.innerText = elem.salary;
+
+      var td5 = document.createElement("td");
+      td5.innerText = "Delete";
+      td5.style.color = "red";
+      td5.style.cursor = "pointer";
+      td5.addEventListener("click", function () {
+        deleteIten(elem, ind);
+      });
+      box.append(td1, td2, td3, td4, td5);
+      tbody.append(box);
+    });
+
+    function deleteIten(elem, ind) {
+      bookMarkData.splice(ind, 1);
+      localStorage.setItem("bookMark", JSON.stringify(bookMarkData));
+      window.location.reload();
+      // var updatedData = JSON.parse(localStorage.getItem("bookMark"));
+      // dis;
+    }
+  </script>
+</html>
