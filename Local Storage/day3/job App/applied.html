@@ -14,7 +14,25 @@
       <div><a href="applied.html">Applied Jobs</a></div>
       <div><a href="bookmark.html">Bookmarks</a></div>
     </div>
-
+    <!-- by name  -->
+    <select id="sortbyName" onChange="handleName()">
+      <option value="--">Sort By Name</option>
+      <option value="asc">Ascending</option>
+      <option value="dec">Descending</option>
+    </select>
+    <!-- salary -->
+    <select id="sortbysalary" onChange="handlesalary()">
+      <option value="--">Sort By Name</option>
+      <option value="asc">Ascending</option>
+      <option value="dec">Descending</option>
+    </select>
+    <!-- profile -->
+    <select id="sortbyprofile" onChange="handleprofile()">
+      <option value="--">Sort By Name</option>
+      <option value="Backend">Backend</option>
+      <option value="Frontend">Frontend</option>
+      <option value="FSD">FSD</option>
+    </select>
     <main>
       <table>
         <thead>
@@ -42,6 +60,7 @@
     displayData(localData);
 
     function displayData(localData) {
+      document.querySelector("tbody").innerHTML = "";
       localData.forEach(function (elem) {
         var box = document.createElement("tr");
         var td1 = document.createElement("td");
@@ -67,6 +86,65 @@
     function bookMark(elem) {
       bookMarkArr.push(elem);
       localStorage.setItem("bookMark", JSON.stringify(bookMarkArr));
+    }
+
+    function handleName() {
+      var select = document.querySelector("#sortbyName").value;
+      if (select == "asc") {
+        localData.sort(function (a, b) {
+          var x = a.nam.toUpperCase();
+          var y = b.nam.toUpperCase();
+          if (x > y) {
+            return 1;
+          }
+          if (x < y) {
+            return -1;
+          }
+
+          return 0;
+        });
+        displayData(localData);
+      }
+      if (select == "dec") {
+        localData.sort(function (a, b) {
+          var x = a.nam.toUpperCase();
+          var y = b.nam.toUpperCase();
+          if (x > y) {
+            return -1;
+          }
+          if (x < y) {
+            return 1;
+          }
+
+          return 0;
+        });
+        displayData(localData);
+      }
+    }
+
+    function handlesalary() {
+      var selected1 = document.querySelector("#sortbysalary").value;
+      if (selected1 == "asc") {
+        localData.sort(function (a, b) {
+          return a.salary - b.salary;
+        });
+        displayData(localData);
+      }
+      if (selected1 == "dec") {
+        localData.sort(function (a, b) {
+          return b.salary - a.salary;
+        });
+        displayData(localData);
+      }
+    }
+
+    function handleprofile() {
+      var select2 = document.querySelector("#sortbyprofile").value;
+      console.log(select2);
+      var filter = localData.filter(function (elem) {
+        return elem.jobRol == select2;
+      });
+      displayData(filter);
     }
   </script>
 </html>
