@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link rel="stylesheet" href="navbar.css" />
     <style>
       #signup {
         width: 500px;
@@ -29,15 +30,29 @@
       }
     </style>
   </head>
-  <body></body>
-  <div id="signup">
-    <form id="form">
-      <input id="email" type="email" placeholder="Email" />
+  <body>
+    <!-- navbar -->
+    <div id="navbar">
+      <div id="rebook">
+        <p><a href="navbar.html">Reebook</a></p>
+      </div>
+      <div id="navinside">
+        <p><a onclick="error()">Men</a></p>
+        <p><a onclick="error()">Women</a></p>
+        <p><a href="signup.html">Sign Up</a></p>
+        <p><a href="Login.html">Login</a></p>
+      </div>
+    </div>
+    <!-- body -->
+    <div id="signup">
+      <form id="form">
+        <input id="email" type="email" placeholder="Email" />
 
-      <input id="password" type="password" placeholder="Password" />
-      <input type="submit" value="Login" />
-    </form>
-  </div>
+        <input id="password" type="password" placeholder="Password" />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+  </body>
 </html>
 <script>
   var data = JSON.parse(localStorage.getItem("loginDetails"));
@@ -51,10 +66,14 @@
     for (var i = 0; i < data.length; i++) {
       if (email == data[i].email && pass == data[i].pass) {
         window.location.href = "men.html";
+        localStorage.setItem("signin", JSON.stringify(data[i]));
+
         return;
       }
     }
 
     alert("Wrong  Login Credntials");
   }
+  var y = JSON.parse(localStorage.getItem("signin"));
+  console.log(y);
 </script>

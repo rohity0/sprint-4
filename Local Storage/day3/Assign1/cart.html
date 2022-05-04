@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+    <link rel="stylesheet" href="navbar.css" />
+    <style>
+      #cartBox {
+        display: grid;
+        width: 70%;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        grid-template-rows: auto;
+        margin: auto;
+        text-align: center;
+        margin-top: 40px;
+      }
+      #cartBox p + p {
+        margin-top: 15px;
+        font-size: 25px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      #buttn {
+        margin-top: 10px;
+        padding: 10px 20px;
+        color: white;
+        background-color: red;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <div id="rebook">
+        <p><a href="men.html">Reebook</a></p>
+      </div>
+      <div id="navinside">
+        <p><a href="men.html">Men</a></p>
+        <p><a href="women.html">Women</a></p>
+        <p class="change"><a href="signup.html">Sign Up</a></p>
+        <p><a href="cart.html">CART</a></p>
+      </div>
+    </div>
+    <div>
+      <h1>Total:-</h1>
+      <h2>Total Items:-</h2>
+      <div id="cartBox"></div>
+    </div>
+  </body>
+</html>
+<script>
+  var cartData = JSON.parse(localStorage.getItem("cartItem")) || [];
+  var cost = document.querySelector("h1");
+  var bBox = document.querySelector("#cartBox");
+  var totalprice = 0;
+  var quant = 0;
+  cartData.forEach(function (elem, ind) {
+    var box = document.createElement("div");
+    var pic = document.createElement("img");
+    pic.setAttribute("src", elem.image_url);
+    var name = document.createElement("p");
+    name.innerText = elem.name;
+    var price = document.createElement("p");
+    price.innerText = elem.price;
+    totalprice += Number(price.innerText);
+
+    var butn = document.createElement("button");
+    butn.innerText = "Delete";
+    butn.setAttribute("id", "buttn");
+    butn.addEventListener("click", function () {
+      deleteCa(elem, ind);
+    });
+
+    box.append(pic, name, price, butn);
+    bBox.append(box);
+  });
+  // cost price
+  console.log((cost.innerText = totalprice));
+  if (totalprice != 0) {
+    cost.innerText = "Total:- " + totalprice;
+  }
+
+  // quantity
+  if (cartData.length != 0) {
+    var x = document.querySelector("h2");
+    x.innerText = "Total Items:-" + cartData.length;
+  }
+
+  // delete
+  function deleteCa(elem, ind) {
+    cartData.splice(ind, 1);
+    localStorage.setItem("cartItem", JSON.stringify(cartData));
+    window.location.reload();
+  }
+
+  var x = document.querySelector(".change");
+
+  var signinData = JSON.parse(localStorage.getItem("signin"));
+  if (signinData != null) {
+    x.innerText = signinData.name;
+  }
+</script>

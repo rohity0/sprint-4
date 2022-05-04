@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="navbar.css" />
+  </head>
+  <body>
+    <div id="navbar">
+      <div id="rebook">
+        <p><a href="navbar.html">Reebook</a></p>
+      </div>
+      <div id="navinside">
+        <p><a onclick="error()">Men</a></p>
+        <p><a onclick="error()">Women</a></p>
+
+        <p class="change"><a href="signup.html">Sign Up</a></p>
+        <p><a href="Login.html">Login</a></p>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  function error() {
+    alert("Kindly Login");
+  }
+
+  var x = document.querySelector(".change");
+
+  var signinData = JSON.parse(localStorage.getItem("signin"));
+  if (signinData != Null) {
+    console.log((x.innerTexx = signinData.name));
+  }
+</script>

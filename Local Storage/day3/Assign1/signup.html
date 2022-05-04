@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="navbar.css" />
     <style>
       #signup {
         width: 500px;
@@ -15,7 +16,7 @@
         /* display: flex; */
         background-color: teal;
         box-sizing: border-box;
-        margin-top: 150px;
+        margin-top: 50px;
       }
       #form {
         display: flex;
@@ -37,15 +38,31 @@
         padding: 15px;
         width: 100%;
         border-radius: 7px;
+        color: black;
+      }
+      a {
+        text-decoration: none;
+        color: black;
       }
     </style>
   </head>
 
   <body>
+    <div id="navbar">
+      <div id="rebook">
+        <p><a href="navbar.html">Reebook</a></p>
+      </div>
+      <div id="navinside">
+        <p><a onclick="error()">Men</a></p>
+        <p><a onclick="error()">Women</a></p>
+        <p><a href="signup.html">Sign Up</a></p>
+        <p><a href="Login.html">Login</a></p>
+      </div>
+    </div>
     <div id="signup">
       <form id="form">
         <input id="email" type="email" placeholder="Email" />
-        <input id="phn" type="number" placeholder="Phnone Number" />
+        <input id="name" type="text" placeholder=" Name" />
         <input id="password" type="password" placeholder="Password" />
         <input type="submit" value="Sign Up" />
       </form>
@@ -65,10 +82,11 @@
 
     var obj = {
       email: form.email.value,
-      phon: form.phn.value,
+      name: form.name.value,
       pass: form.password.value,
     };
     loginArr.push(obj);
     localStorage.setItem("loginDetails", JSON.stringify(loginArr));
+    console.log(loginArr);
   }
 </script>
