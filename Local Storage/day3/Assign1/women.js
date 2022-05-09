@@ -458,24 +458,28 @@ var womensData = [
 
 var cart = JSON.parse(localStorage.getItem("cartItem")) || [];
 var container = document.querySelector("#container");
+displayData(womensData);
 
-womensData.forEach(function (ele) {
-  var box = document.createElement("div");
-  var pic = document.createElement("img");
-  pic.setAttribute("src", ele.image_url);
-  var name = document.createElement("p");
-  name.innerText = ele.name;
-  var price = document.createElement("p");
-  price.innerText = ele.price;
-  var butn = document.createElement("button");
-  butn.innerText = "Add To Cart";
-  butn.style.cursor = "pointer";
-  butn.addEventListener("click", function () {
-    addCart(ele, ele.name);
+function displayData(womensData) {
+  container.innerHTML = "";
+  womensData.forEach(function (ele) {
+    var box = document.createElement("div");
+    var pic = document.createElement("img");
+    pic.setAttribute("src", ele.image_url);
+    var name = document.createElement("p");
+    name.innerText = ele.name;
+    var price = document.createElement("p");
+    price.innerText = ele.price;
+    var butn = document.createElement("button");
+    butn.innerText = "Add To Cart";
+    butn.style.cursor = "pointer";
+    butn.addEventListener("click", function () {
+      addCart(ele, ele.name);
+    });
+    box.append(pic, name, price, butn);
+    container.append(box);
   });
-  box.append(pic, name, price, butn);
-  container.append(box);
-});
+}
 
 // cart
 function addCart(ele) {
@@ -502,4 +506,22 @@ var x = document.querySelector(".change");
 var signinData = JSON.parse(localStorage.getItem("signin"));
 if (signinData != null) {
   x.innerText = signinData.name;
+}
+
+function handleprice() {
+  var selected1 = document.querySelector("#sortbyprice").value;
+  console.log(selected1);
+  if (selected1 == "asc") {
+    womensData.sort(function (a, b) {
+      console.log(a.price, b.price);
+      return a.price - b.price;
+    });
+    displayData(womensData);
+  }
+  if (selected1 == "dec") {
+    womensData.sort(function (a, b) {
+      return b.price - a.price;
+    });
+    displayData(womensData);
+  }
 }
