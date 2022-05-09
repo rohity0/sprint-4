@@ -28,9 +28,9 @@
   }
 
   var x = document.querySelector(".change");
-
+  console.log(x);
   var signinData = JSON.parse(localStorage.getItem("signin"));
   if (signinData != Null) {
-    console.log((x.innerTexx = signinData.name));
+    console.log((x.innerText = signinData.name));
   }
 </script>

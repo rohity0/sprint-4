@@ -3,7 +3,7 @@ var mensData = [
     image_url:
       "https://content.shop4reebok.com/static/Product-EX4296/reebok_EX4296_1.jpg.plp",
     name: "MEN'S REEBOK RUNNING ROADMAP SHOES",
-    price: "1170",
+    price: 1170,
     strikedoffprice: "$2599",
   },
   {
@@ -254,26 +254,29 @@ var mensData = [
 ];
 
 var cart = JSON.parse(localStorage.getItem("cartItem")) || [];
-
 var container = document.querySelector("#container");
+displayData(mensData);
 
-mensData.forEach(function (ele) {
-  var box = document.createElement("div");
-  var pic = document.createElement("img");
-  pic.setAttribute("src", ele.image_url);
-  var name = document.createElement("p");
-  name.innerText = ele.name;
-  var price = document.createElement("p");
-  price.innerText = ele.price;
-  var butn = document.createElement("button");
-  butn.innerText = "Add To Cart";
-  butn.style.cursor = "pointer";
-  butn.addEventListener("click", function () {
-    addCart(ele, ele.name);
+function displayData(mensData) {
+  container.innerHTML = "";
+  mensData.forEach(function (ele) {
+    var box = document.createElement("div");
+    var pic = document.createElement("img");
+    pic.setAttribute("src", ele.image_url);
+    var name = document.createElement("p");
+    name.innerText = ele.name;
+    var price = document.createElement("p");
+    price.innerText = ele.price;
+    var butn = document.createElement("button");
+    butn.innerText = "Add To Cart";
+    butn.style.cursor = "pointer";
+    butn.addEventListener("click", function () {
+      addCart(ele, ele.name);
+    });
+    box.append(pic, name, price, butn);
+    container.append(box);
   });
-  box.append(pic, name, price, butn);
-  container.append(box);
-});
+}
 
 // cart
 function addCart(ele) {
@@ -306,4 +309,22 @@ var x = document.querySelector(".change");
 var signinData = JSON.parse(localStorage.getItem("signin"));
 if (signinData != null) {
   x.innerText = signinData.name;
+}
+
+function handleprice() {
+  var selected1 = document.querySelector("#sortbyprice").value;
+  console.log(selected1);
+  if (selected1 == "asc") {
+    mensData.sort(function (a, b) {
+      console.log(a.price, b.price);
+      return a.price - b.price;
+    });
+    displayData(mensData);
+  }
+  if (selected1 == "dec") {
+    mensData.sort(function (a, b) {
+      return b.price - a.price;
+    });
+    displayData(mensData);
+  }
 }
