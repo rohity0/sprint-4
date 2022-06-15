@@ -79,14 +79,4 @@
 
   function loginData() {
     event.preventDefault();
-
-    var obj = {
-      email: form.email.value,
-      name: form.name.value,
-      pass: form.password.value,
-    };
-    loginArr.push(obj);
-    localStorage.setItem("loginDetails", JSON.stringify(loginArr));
-    console.log(loginArr);
-  }
 </script>
